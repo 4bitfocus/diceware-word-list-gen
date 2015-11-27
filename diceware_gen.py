@@ -90,21 +90,27 @@ def main():
     with open(args.output, 'w') as fp:
         fp.write("Roll five dice for each word in your passphrase. Match up\n")
         fp.write("the 5 digits (e.g. 35126) in the list below.\n\n")
-        for k,v in sorted(dice_words.iteritems()):
-            fp.write("{0} {1}\n".format(k, v))
-        fp.write("\nSpecial Character Table\n\n")
-        fp.write("Roll one die to choose a word in your passphrase, roll\n")
-        fp.write("again to choose a letter in that word. Roll a third and\n")
-        fp.write("fourth time to pick the added character from the\n")
-        fp.write("following table:\n\n")
-        fp.write("  1 2 3 4 5 6\n")
+        fp.write("Additional Security: Capitalization\n\n")
+        fp.write("For extra security insert a capital letter into your passphrase.\n")
+        fp.write("Roll one die to choose a word in your passphrase, roll again to\n")
+        fp.write("choose a letter in that word to capitalize.\n\n")
+        fp.write("Additional Security: Special Character Table\n\n")
+        fp.write("For extra security insert a non-alphabetic character into your\n")
+        fp.write("passphrase. Roll one die to choose a word in your passphrase,\n")
+        fp.write("roll again to choose a letter in that word. Roll a third and\n")
+        fp.write("fourth time to pick the added character from the following table:\n\n")
+        fp.write("    1 2 3 4 5 6\n")
+        fp.write("   .-----------\n")
         for row,row_list in gen_char_table().iteritems():
-            fp.write("{0} ".format(row))
+            fp.write("{0} | ".format(row))
             for i, char in enumerate(row_list):
                 fp.write("{0}".format(char))
                 if i != len(row_list) - 1:
                     fp.write(" ")
             fp.write("\n")
+        fp.write("\nWord List\n\n")
+        for k,v in sorted(dice_words.iteritems()):
+            fp.write("{0} {1}\n".format(k, v))
         fp.write("\nFull reference here: http://world.std.com/~reinhold/diceware.html\n")
     print "created file '{0}'".format(args.output)
     return 0
